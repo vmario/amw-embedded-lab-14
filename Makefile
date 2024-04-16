@@ -29,19 +29,21 @@ LIBDIR = lib
 
 INCLUDES = -I.
 LIBS = -lm
+OPTIMIZATION = -Os
+
 CFLAGS = -mmcu=$(MCU)
 CFLAGS += -std=c99 -Wall -Wundef -Wextra -pedantic -Wstrict-prototypes
-CFLAGS += -Os -g0 -flto
+CFLAGS += $(OPTIMIZATION) -g0 -flto
 CFLAGS += -Wa,-adhlns=$(<:%.c=$(OBJDIR)/%.lst)
 CFLAGS += -MD -MP -MF $(DEPDIR)/$(basename $(@F)).d
 CXXFLAGS = -mmcu=$(MCU)
 CXXFLAGS += -std=c++14 -Wall -Wundef -Wextra -pedantic
-CXXFLAGS += -Os -g0 -flto -fno-exceptions
+CXXFLAGS += $(OPTIMIZATION) -g0 -flto -fno-exceptions
 CXXFLAGS += -Wa,-adhlns=$(<:%.cpp=$(OBJDIR)/%.lst)
 CXXFLAGS += -MD -MP -MF $(DEPDIR)/$(basename $(@F)).d
 LDFLAGS = -mmcu=$(MCU)
-LDFLAGS += -Os -g0 -flto
-#LDFLAGS += -Wl,-u,vfprintf -lprintf_flt -lm 
+LDFLAGS += $(OPTMIZATION) -g0 -flto
+LDFLAGS += -Wl,-u,vfprintf -lprintf_flt
 LDFLAGS += -Wl,-Map=$(TARGET).map,--cref
 DEFS = -DF_CPU=$(F_CPU)ul
 
@@ -108,8 +110,7 @@ erase:
 		-U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0xfd:m -U lock:w:0xcf:m \
 		-U flash:w:bootloader/optiboot_atmega328.hex:i
 
-HEXSIZE = $(SIZE) --target=$(FORMAT) $(TARGET).hex
-ELFSIZE = $(SIZE) -A $(TARGET).elf
+ELFSIZE = $(SIZE) --format=avr --mcu=$(MCU) $(TARGET).elf
 
 sizebefore:
 	@if test -f $(TARGET).elf; then echo; echo $(MSG_SIZE_BEFORE); $(ELFSIZE); fi
