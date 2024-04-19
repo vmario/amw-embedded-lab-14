@@ -46,7 +46,8 @@ struct Keypad {
 
 private:
 	uint16_t measurement{1023}; ///< Wynik ostatniego pomiaru.
-	KEY lastKey{KEY_NONE}; ///< Ostatnio wciśnięty klawisz.
+	KEY lastKey{KEY_NONE}; ///< Ostatnio wykryty klawisz.
+	KEY debouncedKey{KEY_NONE}; ///< Ostatnio wciśnięty klawisz.
 };
 
 /**

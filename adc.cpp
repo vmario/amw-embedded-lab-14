@@ -21,12 +21,14 @@ void Adc::initialize() const
 	ADMUX = _BV(REFS0);
 	ADCSRA = _BV(ADEN) | _BV(ADSC) | _BV(ADATE) | _BV(ADIE) | _BV(ADPS2) | _BV(ADPS1) | _BV(ADPS0);
 
-#if 0
+#if 1
 	// XXX: Czas na ustabilizowanie źródła napięcia referencyjnego oraz wykonanie pierwszego,
 	// mniej precyzyjnego pomiaru.
 	_delay_ms(1);
 
+#if 0
 	ADCSRB = _BV(ADTS2) | _BV(ADTS1);
+#endif
 #endif
 }
 
