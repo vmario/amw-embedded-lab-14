@@ -1,5 +1,5 @@
 ---
-title: "Ćwiczenie 12: Obsługa klawiatury analogowej"
+title: "Ćwiczenie 14: Przechowywanie danych w pamięci Flash"
 author: [Mariusz Chilmon <<mariusz.chilmon@ctm.gdynia.pl>>]
 lang: "pl"
 titlepage: no
@@ -37,42 +37,30 @@ _W trosce o Państwa wyniki proszę o czytelne wpisywanie nazwisk._
 
 ## Zadanie podstawowe
 
-Wyznacz wartości progowe napięć $V_{threshold}$ dla przycisków w postaci połowy przedziałów między przypisanymi do nich napięciami $V_{key}$. Podaj wzór na wartość pomiaru ADC, której użyjesz w kodzie programu.
+Jaki jest rozmiar pamięci programu (Flash) a jaki rozmiar pamięci danych (SRAM) w mikrokontrolerze ATmega328P?
 
-\awesomebox[violet]{2pt}{\faBook}{violet}{$V_{key}$ odczytaj ze schematu w instrukcji do ćwiczenia lub ze schematu ideowego płytki.}
+\vspace{1.5cm}
 
-\begin{center}
-\begin{tabular}{|c|>{\centering}m{15mm}|>{\centering}m{15mm}|c|} 
-\hline
-Przycisk & $V_{key}$ & $V_{threshold}$ & ADC \\
-\hline
-\texttt{RIGHT} & $0{,}0~\text{V}$ & $0{,}5~\text{V}$ & $\sfrac{0{,}5}{5} \cdot 1024$ \\
-\hline
-\texttt{UP} & $1{,}0~\text{V}$ & $1{,}5~\text{V}$ & $\sfrac{1{,}5}{5} \cdot 1024$ \\ 
-\hline
-\texttt{DOWN} & & & \phantom{WWWWWWWWWWWW} \\[1em]
-\hline
-\texttt{LEFT} & & & \\[1em]
-\hline
-\texttt{SELECT} & & & \\[1em]
-\hline
-\end{tabular}
-\end{center}
+Jaki jest rozmiar programu w pamięci Flash i rozmiar danych w pamięci RAM po wprowadzeniu poprawek?
 
-Czy zmiana napięcia zasilania zaburzy działanie klawiatury? Dlaczego?
+\vspace{1.5cm}
+
+Oszacuj zajętość obu pamięci przed wprowadzeniem poprawek (gdyby linker nie weryfikował rozmiaru pamięci).
 
 \vspace{1.5cm}
 
 ## Zadanie rozszerzone
 
-Od czego zależy maksymalna liczba przycisków, jakie możemy podłączyć do takiej klawiatury?
+Jeżeli zwiększymy rozmiar tablicy `buf`, np. o 10&nbsp;bajtów:
 
-\vspace{3cm}
+```
+char buf[DISPLAY_LENGTH + 1 + 10];
+```
 
-W jakim zakresie zmienia się licznik `int16_t counter`?
+rozmiar zajętej pamięci danych, raportowany przez kompilator, nie zmienia się. Dlaczego?
 
 \vspace{1.5cm}
 
-W jakim zakresie zmieniałby się licznik, gdyby był typu `uint16_t`?
+Czy zajętość pamięci RAM wskazywana przez kompilator pozwala w pełni ocenić obciążenie pamięci danych przez program?
 
 \vspace{1.5cm}
